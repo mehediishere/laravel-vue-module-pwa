@@ -40,13 +40,18 @@ class AppServiceProvider extends ServiceProvider
                                     'name' => $groupedLink['name'],
                                     'route' => route($groupedLink['route']),
                                     'icon' => $groupedLink['icon'] ?? '',
+                                    'order' => $groupedLink['order'] ?? 1000,  // Default high order if not set
                                     'active' => request()->routeIs($groupedLink['route']),
                                 ];
                             }
 
+                            // Sort the grouped links by order
+                            usort($links, fn($a, $b) => $a['order'] <=> $b['order']);
+
                             $additionalLinks[] = [
                                 'group' => $link['group'],
                                 'icon' => $link['icon'] ?? '',
+                                'order' => $link['order'] ?? 100,
                                 'links' => $links,
                             ];
                         } else {
@@ -54,12 +59,16 @@ class AppServiceProvider extends ServiceProvider
                                 'name' => $link['name'],
                                 'route' => route($link['route']),
                                 'icon' => $link['icon'] ?? '',
+                                'order' => $link['order'] ?? 1000,
                                 'active' => request()->routeIs($link['route']),
                             ];
                         }
                     }
                 }
             }
+
+            // Sort main links by order
+            usort($additionalLinks, fn($a, $b) => $a['order'] <=> $b['order']);
 
             $view->with('additionalLinks', $additionalLinks);
         });
