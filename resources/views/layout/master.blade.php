@@ -55,8 +55,6 @@
 
     <!-- Page Content -->
     <div class="container">
-        <button id="installButton">Install App</button>
-
         @yield('content')
     </div>
 </div>

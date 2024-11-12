@@ -43,5 +43,11 @@
                 @endif
             @endforeach
         @endif
+
+        <li>
+            <a href="javascript:void(0)" class="nav-link" id="installButton">
+                <i class="fa-solid fa-mobile-screen-button"></i> Install App
+            </a>
+        </li>
     </ul>
 </nav>
