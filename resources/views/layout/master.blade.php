@@ -55,6 +55,8 @@
 
     <!-- Page Content -->
     <div class="container">
+        <button id="installButton">Install App</button>
+
         @yield('content')
     </div>
 </div>
@@ -88,6 +90,42 @@
                 });
         });
     }
+</script>
+<script>
+    let deferredPrompt;
+
+    // Listen for the 'beforeinstallprompt' event
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent the default install prompt
+        e.preventDefault();
+
+        // Save the event to trigger later
+        deferredPrompt = e;
+
+        // Show the custom install button
+        const installButton = document.getElementById('installButton');
+        installButton.style.display = 'block'; // Show the button
+
+        // Add event listener for when the button is clicked
+        installButton.addEventListener('click', () => {
+            // Show the install prompt
+            deferredPrompt.prompt();
+
+            // Handle the user's response
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+                // Reset the prompt to null after user interaction
+                deferredPrompt = null;
+                // Optionally hide the button after use
+                installButton.style.display = 'none';
+            });
+        });
+    });
+
 </script>
 </body>
 </html>
