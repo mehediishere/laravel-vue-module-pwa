@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -28,6 +29,19 @@
             flex-grow: 1;
             padding: 20px;
         }
+
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+            background-color: #FF5F1F;
+        }
+
+        .dropdown-item.active, .dropdown-item:active{
+            background-color: #fc7a46;
+        }
+
+        /* Keep dropdown open if it contains an item with the 'active' class */
+/*        .nav-item.dropdown:has(.dropdown-item.active) .dropdown-menu {
+            display: block;
+        }*/
     </style>
 </head>
 <body>
@@ -45,5 +59,19 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdowns = document.querySelectorAll('.nav-item.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const activeItem = dropdown.querySelector('.dropdown-item.active');
+            if (activeItem) {
+                dropdown.classList.add('show'); // Add 'show' to keep the dropdown open
+                dropdown.querySelector('.dropdown-menu').classList.add('show');
+            }
+        });
+    });
+</script>
 </body>
 </html>

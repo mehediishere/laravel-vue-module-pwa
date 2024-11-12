@@ -39,18 +39,21 @@ class AppServiceProvider extends ServiceProvider
                                 $links[] = [
                                     'name' => $groupedLink['name'],
                                     'route' => route($groupedLink['route']),
+                                    'icon' => $groupedLink['icon'] ?? '',
                                     'active' => request()->routeIs($groupedLink['route']),
                                 ];
                             }
 
                             $additionalLinks[] = [
                                 'group' => $link['group'],
+                                'icon' => $link['icon'] ?? '',
                                 'links' => $links,
                             ];
                         } else {
                             $additionalLinks[] = [
                                 'name' => $link['name'],
                                 'route' => route($link['route']),
+                                'icon' => $link['icon'] ?? '',
                                 'active' => request()->routeIs($link['route']),
                             ];
                         }
