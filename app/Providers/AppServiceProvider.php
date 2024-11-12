@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
             $additionalLinks = [];
 
             foreach (Module::allEnabled() as $module) {
-                $configPath = $module->getPath() . '/Config/sidebar_links.php';
+                $configPath = $module->getPath() . '/config/sidebar_links.php';
 
                 if (file_exists($configPath)) {
                     $moduleLinks = require $configPath;
