@@ -15,8 +15,7 @@ use Modules\Pos\Http\Controllers\PosController;
 */
 
 Route::group([], function () {
-//    Route::resource('pos', PosController::class)->names('pos');
-    // Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
 
     // Catch-all route for Vue Router SPA to handle other routes
     Route::get('/pos/{any?}', [PosController::class, 'index'])->where('any', '.*');
